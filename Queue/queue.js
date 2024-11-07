@@ -14,7 +14,7 @@ class Queue {
     };
 
     dequeue() {
-        val = this.queue[0];
+        var val = this.queue[0];
         this.queue.splice(0, 1);
         return val;
     };
