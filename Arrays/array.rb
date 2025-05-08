@@ -81,9 +81,45 @@ class Arr
     right_part = quickSort arr[pivot_ind + 1...]
 
     return left_part + [pivot_val] + right_part
+  end
 
+  def mergeSort(arr)
+    if arr.length <= 1
+      return arr
+    end
+
+    mid = arr.length / 2
+    left = mergeSort(arr[0,mid])
+    right = mergeSort(arr[mid...])
+
+    res = []
+
+    while left.length > 0 && right.length > 0 do
+      if left[0] < right[0]
+        res << left[0]
+        left.shift
+      elsif right[0] < left[0]
+        res << right[0]
+        right.shift
+      else
+        res << left[0]
+        res << right[0]
+        left.shift
+        right.shift
+      end
+    end
+
+    if left.length > 0
+      res += left
+    end
+
+    if right.length > 0
+      res += right
+    end
+
+    return res
   end
 end
 
 my_arr = Arr.new([4, 3, 1, 2])
-p my_arr.quickSort my_arr.arr
+p my_arr.mergeSort my_arr.arr

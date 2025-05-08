@@ -93,3 +93,83 @@ function partitionFunc(left, right, pivot)
    return leftPointer
 end function
 ```
+
+### MergeSort
+This is a Divide and Conquer sorting algorithm.
+The steps invovled are (Obtained from <a href="https://www.geeksforgeeks.org/merge-sort/">GeeksForGeeks</a>):
+1. **Divide**: Divide the list/array recursively into two halves until it can't be divided anymore
+2. **Conquer**: Each subarray is sorted individually using the merge sort algorithm
+3. **Merge**: The sorted subarrays are merged back together in sorted order
+
+Below is my pseudocode implementation of the Merge sort algorithm
+```
+function MergeSort(array)
+  if LEN(array) <= 1 do
+    return array
+  end if
+
+  mid_point = floor(LEN(array) / 2)
+  left_sub_array = MergeSort(array[0:mid_point])
+  right_sub_array = MergeSort(array[mid_point:LEN(array)])
+
+  merged_array = []
+
+  while LEN(array) > 0 and LEN(array) > 0 do
+    if left[0] < right[0] do
+      res.append(left[0])
+      left.shift
+    else if right[0] < left[0] do
+      res.append(right[0])
+      right.shift
+    else
+      res.append(left[0])
+      res.append(right[0])
+      left.shift
+      right.shift
+    end if
+  end while
+
+  if LEN(left) > 0
+    res.concatenate(left)
+  end if
+
+  if LEN(right) > 0
+    res.concatenate(right)
+  end if
+
+  return res
+end function
+```
+
+Here is a better pseudocode implementation from <a href="https://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm">tutorialspoint</a>
+```
+procedure mergesort( var a as array )
+   if ( n == 1 ) return a
+      var l1 as array = a[0] ... a[n/2]
+      var l2 as array = a[n/2+1] ... a[n]
+      l1 = mergesort( l1 )
+      l2 = mergesort( l2 )
+      return merge( l1, l2 )
+end procedure
+procedure merge( var a as array, var b as array )
+   var c as array
+   while ( a and b have elements )
+      if ( a[0] > b[0] )
+         add b[0] to the end of c
+         remove b[0] from b
+      else
+         add a[0] to the end of c
+         remove a[0] from a
+      end if
+   end while
+   while ( a has elements )
+      add a[0] to the end of c
+      remove a[0] from a
+   end while
+   while ( b has elements )
+      add b[0] to the end of c
+      remove b[0] from b
+   end while
+   return c
+end procedure
+```

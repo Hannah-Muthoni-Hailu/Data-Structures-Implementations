@@ -76,8 +76,39 @@ class Arr:
         right_part = self.quick_sort(arr[pivot_ind+1:])
 
         return left_part + [pivot_val] + right_part
+    
+    def merge_sort(self, arr):
+        if len(arr) <= 1:
+            return arr
+        
+        mid = len(arr) // 2
+        left = self.merge_sort(arr[0:mid])
+        right = self.merge_sort(arr[mid:])
+
+        res = []
+
+        while len(left) > 0 and len(right) > 0:
+            if left[0] < right[0]:
+                res.append(left[0])
+                left = left.pop()
+            elif right[0] < left[0]:
+                res.append(right[0])
+                right = right.pop()
+            else:
+                res.append(right[0])
+                res.append(left[0])
+                right = right.pop()
+                left = left.pop()
+
+        if len(left) > 0:
+            res.extend(left)
+        if len(right) > 0:
+            res.extend(right)
+
+        return res
+
 
 
 my_arr = Arr([2, 5, 1, 3, 6])
 # print(my_arr.arr)
-print(my_arr.quick_sort(my_arr.arr))
+print(my_arr.merge_sort(my_arr.arr))
