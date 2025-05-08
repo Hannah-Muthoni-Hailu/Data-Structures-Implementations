@@ -53,12 +53,56 @@ class Arr {
 
     loop() {
         for (let i = 0; i < this.arr.length; i++){
-            yield this.arr[i]
+            // yield this.arr[i]
         }
+    }
+
+    quickSort(arr){
+        // Base case
+        if (arr.length <= 1) {
+            print(arr)
+            return arr
+        }
+
+        // Identify the pivot
+        let pivot_ind = Math.floor(arr.length / 2)
+        let pivot_val = arr[pivot_ind]
+
+        // Identify left and right pointers
+        let left = 0
+        let right = arr.length - 1
+
+        while (right > left) {
+            // Step
+            while (arr[left] < pivot_val) {
+                left += 1
+            }
+
+            while (right > 0 && arr[right] > pivot_val){
+                right -= 1
+            }
+
+            // Swap
+            let holder = arr[right]
+            arr[right] = arr[left]
+            arr[left] = holder
+
+            // Check if pivot has been shifted
+            if (arr[right] == pivot_val) {
+                pivot_ind = right
+            } else if (arr[left] == pivot_val) {
+                pivot_ind = left
+            }
+        }
+
+
+        let left_part = this.quickSort(arr.slice(0, pivot_ind))
+        let right_part = this.quickSort(arr.slice(pivot_ind + 1, arr.length))
+
+        return left_part.concat([pivot_val].concat(right_part))
     }
 
 }
 
-my_array = new Arr([1, 2, 3, 4])
-my_array.rem(3)
-console.log(my_array.arr)
+let my_array = new Arr([4, 3, 1, 2, 5], 1)
+console.log(my_array.quickSortAdvanced(my_array.arr))

@@ -1,3 +1,5 @@
+import math
+
 class Arr:
     def __init__(self, arr=[]):
         self.arr = arr
@@ -39,7 +41,43 @@ class Arr:
         for item in self.arr:
             yield item
 
+    def quick_sort(self, arr, counter =0):
+        #Base case
+        if len(arr) <= 1:
+            return arr
+        
+        # Pivot
+        pivot_ind = len(arr) // 2
+        pivot_val = arr[pivot_ind]
 
-my_arr = Arr([1, 2, 3, 4, 5])
-my_arr.arr_remove(3)
-print(my_arr.arr)
+        # Left and right pointers
+        left = 0
+        right = len(arr) - 1
+
+        while right > left:
+            while arr[left] < pivot_val:
+                left += 1
+
+            while right > 0 and arr[right] > pivot_val:
+                right -= 1
+
+            # Swap
+            holder = arr[right]
+            arr[right] = arr[left]
+            arr[left] = holder
+
+            # Check if the pivot has been shifted
+            if arr[right] == pivot_val:
+                pivot_ind = right
+            elif arr[left] == pivot_val:
+                pivot_ind = left
+
+        left_part = self.quick_sort(arr[0:pivot_ind])
+        right_part = self.quick_sort(arr[pivot_ind+1:])
+
+        return left_part + [pivot_val] + right_part
+
+
+my_arr = Arr([2, 5, 1, 3, 6])
+# print(my_arr.arr)
+print(my_arr.quick_sort(my_arr.arr))
