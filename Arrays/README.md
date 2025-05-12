@@ -190,17 +190,19 @@ The steps involved are:
 The algorithm can be implemented recursively or iteratively, I will do a recursive implementation (just to get recursion practice, not for preferring the recursive implementation)
 
 ```
-function BinarySearch(array, value, midpoint=floor(LEN(array)/2))
+function BinarySearch(array, value, start=0, end=LEN(arr) - 1)
   if LEN(array) == 0 do
     return false
   end if
 
+  midpoint = floor((start + end)/ 2)
+
   if array[midpoint] == value do
     return midpoint
   else if array[midpoint] > value do
-    return BinarySearch(array, value, floor(LEN(array[0: midpoint]) / 2))
+    return BinarySearch(array, value, start, midpoint - 1)
   else
-    return BinarySearch(array, value, floor(LEN(array[midpoint+1: LEN(array)]) / 2))
+    return BinarySearch(array, value, midpoint + 1, end)
   end if
 end function
 ```
