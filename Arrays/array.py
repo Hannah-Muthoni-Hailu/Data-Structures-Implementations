@@ -132,6 +132,16 @@ class Arr:
             return self.binary_search(arr, val, mid+1, end, counter - 1)
 
 
+def two_pointer(arr):
+    start = 0
+    end = len(arr) - 1
+
+    while start < end:
+        yield start, end
+        start += 1
+        end -= 1
+
+
 
 my_arr = Arr([0, 1, 3, 4])
 # print(my_arr.arr)
