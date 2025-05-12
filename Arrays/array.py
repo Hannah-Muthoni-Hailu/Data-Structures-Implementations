@@ -107,7 +107,9 @@ class Arr:
 
         return res
     
-    def binary_search(self, arr, val, start=0, end=None):
+    def binary_search(self, arr, val, start=0, end=None, counter = 5):
+        if counter == 0:
+            return "Failed"
         if start == end:
             if arr[start] == val:
                 return start
@@ -117,17 +119,20 @@ class Arr:
         if not end:
             end = len(arr) - 1
 
+        if end < start:
+            return False
+
         mid = (start + end) // 2
 
         if arr[mid] == val:
             return mid
         elif arr[mid] > val:
-            return self.binary_search(arr, val, start, mid-1)
+            return self.binary_search(arr, val, start, mid-1, counter - 1)
         else:
-            return self.binary_search(arr, val, mid+1, end)
+            return self.binary_search(arr, val, mid+1, end, counter - 1)
 
 
 
-my_arr = Arr([0, 1, 2, 3, 4, 5])
+my_arr = Arr([0, 1, 3, 4])
 # print(my_arr.arr)
-print(my_arr.binary_search(my_arr.arr, 0))
+print(my_arr.binary_search(my_arr.arr, 2))

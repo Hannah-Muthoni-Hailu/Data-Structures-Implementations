@@ -195,6 +195,10 @@ function BinarySearch(array, value, start=0, end=LEN(arr) - 1)
     return false
   end if
 
+  if end < start do
+    return false
+  end if
+
   midpoint = floor((start + end)/ 2)
 
   if array[midpoint] == value do

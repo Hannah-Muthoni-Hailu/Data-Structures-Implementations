@@ -139,7 +139,35 @@ class Arr {
         return res
     }
 
+    binarySearch(arr, val, start=0, end=null) {
+        if (start == end) {
+            if (arr[start] == val) {
+                return start
+            } else {
+                return false
+            }
+        }
+
+        if (!end) {
+            end = arr.length  - 1
+        }
+
+        if (end < start) {
+            return false
+        }
+
+        let mid = Math.floor((start + end) / 2)
+
+        if (arr[mid] == val) {
+            return mid
+        } else if (arr[mid] > val) {
+            return this.binarySearch(arr, val, start, mid-1)
+        } else {
+            return this.binarySearch(arr, val, mid+1, end)
+        }
+    }
+
 }
 
-let my_array = new Arr([4, 3, 1, 2, 5], 1)
-console.log(my_array.mergeSort(my_array.arr))
+let my_array = new Arr([0, 1, 2, 3, 4])
+console.log(my_array.binarySearch(my_array.arr, 2))
