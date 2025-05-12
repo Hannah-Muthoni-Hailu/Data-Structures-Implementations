@@ -106,9 +106,28 @@ class Arr:
             res.extend(right)
 
         return res
+    
+    def binary_search(self, arr, val, start=0, end=None):
+        if start == end:
+            if arr[start] == val:
+                return start
+            else:
+                return False
+        
+        if not end:
+            end = len(arr) - 1
+
+        mid = (start + end) // 2
+
+        if arr[mid] == val:
+            return mid
+        elif arr[mid] > val:
+            return self.binary_search(arr, val, start, mid-1)
+        else:
+            return self.binary_search(arr, val, mid+1, end)
 
 
 
-my_arr = Arr([2, 5, 1, 3, 6])
+my_arr = Arr([0, 1, 2, 3, 4, 5])
 # print(my_arr.arr)
-print(my_arr.merge_sort(my_arr.arr))
+print(my_arr.binary_search(my_arr.arr, 0))
