@@ -100,6 +100,7 @@ The steps invovled are (Obtained from <a href="https://www.geeksforgeeks.org/mer
 1. **Divide**: Divide the list/array recursively into two halves until it can't be divided anymore
 2. **Conquer**: Each subarray is sorted individually using the merge sort algorithm
 3. **Merge**: The sorted subarrays are merged back together in sorted order
+It has a time complexity of O(logN)
 
 Below is my pseudocode implementation of the Merge sort algorithm
 ```
@@ -171,5 +172,63 @@ procedure merge( var a as array, var b as array )
       remove b[0] from b
    end while
    return c
+end procedure
+```
+
+## Searching
+### Binary Search
+This algorithm works by checking the value at the center of the array then determines whether to check the left or right side based on whether the value being searched for is larger or smaller than the central value.
+The steps involved are:
+1. Identify the midpoint
+2. Check the value at the midpoint to determine if it is greater than, smaller or equal to the expected value
+  + If the value is greater than the expected value, repeat the process above on the right side of the array
+  + If the value is less than the expected value, repeat the process above on the left side of the array
+  + If the value is equal to the expected value, return its index
+**Note** - This algorithm only works on sorted arrays
+**Time Complexity** - O(logN)
+
+The algorithm can be implemented recursively or iteratively, I will do a recursive implementation (just to get recursion practice, not for preferring the recursive implementation)
+
+```
+function BinarySearch(array, value, midpoint=floor(LEN(array)/2))
+  if LEN(array) == 0 do
+    return false
+  end if
+
+  if array[midpoint] == value do
+    return midpoint
+  else if array[midpoint] > value do
+    return BinarySearch(array, value, floor(LEN(array[0: midpoint]) / 2))
+  else
+    return BinarySearch(array, value, floor(LEN(array[midpoint+1: LEN(array)]) / 2))
+  end if
+end function
+```
+
+Below is an iterative implementation from <a href="https://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm">Tutorials Point</a>
+```
+Procedure binary_search
+   A ← sorted array
+   n ← size of array
+   x ← value to be searched
+
+   Set lowerBound = 1
+   Set upperBound = n
+
+   while x not found
+      if upperBound < lowerBound
+         EXIT: x does not exists.
+
+      set midPoint = lowerBound + ( upperBound - lowerBound ) / 2
+
+      if A[midPoint] < x
+         set lowerBound = midPoint + 1
+
+      if A[midPoint] > x
+         set upperBound = midPoint - 1
+
+      if A[midPoint] = x
+         EXIT: x found at location midPoint
+   end while
 end procedure
 ```
