@@ -119,7 +119,31 @@ class Arr
 
     return res
   end
+
+  def binarySearch(arr, val, s=0, e=nil)
+    if s == e
+      if arr[s] == val
+        return s
+      else
+        return false
+      end
+    end
+
+    if e == nil
+      e = arr.length - 1
+    end
+
+    mid = (s + e) / 2
+
+    if arr[mid] == val
+      return mid
+    elsif arr[mid] > val
+      return binarySearch(arr, val, s, mid-1)
+    else
+      return binarySearch(arr, val, mid+1, e)
+    end
+  end
 end
 
-my_arr = Arr.new([4, 3, 1, 2])
-p my_arr.mergeSort my_arr.arr
+my_arr = Arr.new([0, 3])
+p my_arr.binarySearch my_arr.arr, 2
