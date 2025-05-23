@@ -48,7 +48,7 @@ class LinkedList
   end
 
   def head
-    @head.value
+    @head
   end
 
   def tail
@@ -172,13 +172,13 @@ class LinkedList
   end
 end
 
-list = LinkedList.new
+# list = LinkedList.new
 
-list.append('dog')
-list.append('cat')
-list.append('parrot')
-list.append('hamster')
-list.append('snake')
-list.append('turtle')
+# list.append('dog')
+# list.append('cat')
+# list.append('parrot')
+# list.append('hamster')
+# list.append('snake')
+# list.append('turtle')
 
-puts list
+# puts list
